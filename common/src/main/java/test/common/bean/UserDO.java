@@ -1,11 +1,13 @@
 package test.common.bean;
 
+import java.io.Serializable;
+
 /**
  * User: weilin.li
  * Date: 14-5-7
  * Time: 上午9:17
  */
-public class UserDO {
+public class UserDO implements Serializable{
     private Long id;
     private String name;
     private Integer age;
