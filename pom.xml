@@ -14,6 +14,8 @@
         <module>common-bean-test</module>
         <module>common</module>
         <module>jsonparser</module>
+        <module>sendtest</module>
+        <module>spring_mvc_json</module>
     </modules>
 
     <dependencies>
