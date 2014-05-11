@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spring_mvc_json</artifactId>
+    <artifactId>spring_core_config</artifactId>
 
 
     <properties>
