@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class Main {
 
-    public static ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/applicationContext.xml");
+    public static ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring/spring-context.xml");
 
     public static void main(String[] args) {
 

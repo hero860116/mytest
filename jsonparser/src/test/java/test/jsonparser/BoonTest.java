@@ -218,6 +218,30 @@ public class BoonTest {
     }
 
     @Test
+    public void testPerformanceFastObj() {
+        List<UserDO> userDOs = new ArrayList<UserDO>();
+
+        UserDO userDO = new UserDO();
+        userDO.setName("liweilin");
+        userDO.setAge(28);
+        userDO.setEmail("xxx@hotmail.com");
+        userDOs.add(userDO);
+
+        userDO = new UserDO();
+        userDO.setName("liweilin1");
+        userDO.setAge(29);
+        userDO.setEmail("xxx1@hotmail.com");
+        userDOs.add(userDO);
+
+        String str = JSON.toJSONString(userDOs, SerializerFeature.WriteClassName, SerializerFeature.SkipTransientField, SerializerFeature.WriteDateUseDateFormat, SerializerFeature.WriteNullListAsEmpty);
+
+        List<UserDO> reUserDOs = ( List<UserDO>)JSON.parse(str);
+
+
+       int a = 1;
+    }
+
+    @Test
     public void testPerformanceSeraible() {
         Converter<Object, byte[]> serializer = new SerializingConverter();
         Converter<byte[], Object> deserializer = new DeserializingConverter();

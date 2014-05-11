@@ -14,8 +14,14 @@
         <module>common-bean-test</module>
         <module>common</module>
         <module>jsonparser</module>
-        <module>sendtest</module>
         <module>spring_mvc_json</module>
+        <module>spring_core_config</module>
+        <module>spring_core_database</module>
+        <module>spring_core_property_database</module>
+        <module>spring_data_mybatis</module>
+        <module>google_guava</module>
+        <module>performance_generate_database</module>
+        <module>performance_generate_receive_web</module>
     </modules>
 
     <dependencies>
@@ -33,7 +39,26 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>3.2.0.RELEASE</version>
+            <version>3.2.2.RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.1.23</version>
+        </dependency>
+
+        <!-- 工具包 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>17.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
         </dependency>
     </dependencies>
 

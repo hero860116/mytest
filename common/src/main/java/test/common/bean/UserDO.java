@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Date: 14-5-7
  * Time: 上午9:17
  */
-public class UserDO implements Serializable{
+public class UserDO extends BaseDO{
     private Long id;
     private String name;
     private Integer age;
