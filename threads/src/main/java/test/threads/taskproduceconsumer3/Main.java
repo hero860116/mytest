@@ -3,8 +3,7 @@ package test.threads.taskproduceconsumer3;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test.common.bean.CustomerDO;
-import test.threads.producersconsumers.MyQueue;
-import test.threads.task_single_thread.CheckCustomerAO;
+import test.threads.service.CheckCustomerAO;
 
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -22,7 +21,7 @@ public class Main {
 
 
         ArrayBlockingQueue<List<CustomerDO>> myQueue = new ArrayBlockingQueue<List<CustomerDO>>(10);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             new TaskConsumer3(myQueue).start();
         }
 

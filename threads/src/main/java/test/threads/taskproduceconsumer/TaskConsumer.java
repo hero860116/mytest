@@ -2,8 +2,7 @@ package test.threads.taskproduceconsumer;
 
 import test.common.bean.CustomerDO;
 import test.threads.producersconsumers.MyQueue;
-import test.threads.task_more_thread.*;
-import test.threads.task_single_thread.*;
+import test.threads.service.CheckCustomerAO;
 
 /**
  * User: weilin.li

@@ -1,17 +1,17 @@
-package test.threads;
+package test.threads.threaddispatch;
 
 /**
  * User: weilin.li
  * Date: 14-5-4
  * Time: 下午6:52
  */
-public class Calculation20Thread implements Runnable {
+public class CalculationBlock20Thread implements Runnable {
     private long startTime;
 
     private long start;
     private long end;
 
-    public Calculation20Thread(long start, long end, long startTime) {
+    public CalculationBlock20Thread(long start, long end, long startTime) {
         this.start = start;
         this.end = end;
         this.startTime = startTime;
@@ -27,6 +27,12 @@ public class Calculation20Thread implements Runnable {
                 result += i;
             }
 
+            try {
+                Thread.sleep(20);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             long p = System.currentTimeMillis();
             System.out.println(p-startTime);
         }
@@ -37,6 +43,6 @@ public class Calculation20Thread implements Runnable {
     }
 
     public static void main(String[] args) {
-        new Thread(new Calculation20Thread(1,10000000, System.currentTimeMillis())).start();
+        new Thread(new CalculationBlock20Thread(1,10000000, System.currentTimeMillis())).start();
     }
 }

@@ -2,6 +2,7 @@ package test.threads;
 
 
 import org.junit.Test;
+import test.threads.threaddispatch.CalculationThread;
 
 /**
  * User: weilin.li

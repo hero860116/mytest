@@ -1,10 +1,12 @@
-package test.threads.taskproduceconsumer;
+package test.threads.task2_more_thread;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test.common.bean.CustomerDO;
-import test.threads.producersconsumers.MyQueue;
 import test.threads.service.CheckCustomerAO;
+
+import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
 
 /**
  * Created by lwl on 14-5-10.
@@ -18,11 +20,11 @@ public class Main {
         CheckCustomerAO checkTaskAO = (CheckCustomerAO) test.threads.task_more_thread.Main.applicationContext.getBean("checkCustomerAO");
 
 
-        MyQueue<CustomerDO> myQueue = new MyQueue<CustomerDO>(50);
-        for (int i = 0; i < 10; i++) {
-            new TaskConsumer(myQueue).start();
+        ArrayBlockingQueue<List<CustomerDO>> myQueue = new ArrayBlockingQueue<List<CustomerDO>>(10);
+        for (int i = 0; i < 100; i++) {
+            new Task1Consumer(myQueue).start();
         }
 
-        checkTaskAO.getCustomers(myQueue);
+        checkTaskAO.getBatchCustomers3(myQueue);
     }
 }

@@ -1,4 +1,4 @@
-package test.threads.taskproduceconsumer3;
+package test.threads.task2_more_thread;
 
 import test.common.bean.CustomerDO;
 import test.threads.service.CheckCustomerAO;
@@ -11,11 +11,11 @@ import java.util.concurrent.ArrayBlockingQueue;
  * Date: 14-5-5
  * Time: 下午7:46
  */
-public class TaskConsumer3 extends Thread {
+public class Task1Consumer extends Thread {
 
     private  ArrayBlockingQueue<List<CustomerDO>> myQueue;
 
-    public TaskConsumer3( ArrayBlockingQueue<List<CustomerDO>> myQueue) {
+    public Task1Consumer(ArrayBlockingQueue<List<CustomerDO>> myQueue) {
         this.myQueue = myQueue;
     }
 

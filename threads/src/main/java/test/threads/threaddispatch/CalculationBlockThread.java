@@ -1,16 +1,16 @@
-package test.threads;
+package test.threads.threaddispatch;
 
 /**
  * User: weilin.li
  * Date: 14-5-4
  * Time: 下午6:52
  */
-public class CalculationThread extends Thread {
+public class CalculationBlockThread extends Thread {
     private long start;
     private long end;
     private long startTime;
 
-    public CalculationThread(long start, long end, long startTime) {
+    public CalculationBlockThread(long start, long end, long startTime) {
         this.start = start;
         this.end = end;
         this.startTime = startTime;
@@ -24,6 +24,12 @@ public class CalculationThread extends Thread {
             result += i;
         }
 
+        try {
+            Thread.sleep(20);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         long s = System.currentTimeMillis();
         System.out.println("Calculation end costTime:" + (s - startTime) + "ms");
     }
@@ -31,22 +37,17 @@ public class CalculationThread extends Thread {
     public static void main(String[] args) {
         System.out.println("Calculation start");
 
-        CalculationThread[] threads = new CalculationThread[20];
+
+        CalculationBlockThread[] threads = new CalculationBlockThread[20];
         for (int i = 0; i < threads.length; i++) {
-            threads[i] =  new CalculationThread(1,10000000, 0);
+            threads[i] =  new CalculationBlockThread(1,10000000, 0);
         }
 
         long s = System.currentTimeMillis();
-        for (CalculationThread thread : threads) {
+        for (CalculationBlockThread thread : threads) {
             thread.setStartTime(s);
             thread.start();
         }
-
-
-/*        long s = System.currentTimeMillis();
-        for (int i = 0; i < 20; i++) {
-            new CalculationThread(1,10000000, s).start();
-        }*/
     }
 
     public void setStartTime(long startTime) {

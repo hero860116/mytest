@@ -1,4 +1,4 @@
-package test.threads.task_single_thread;
+package test.threads.service;
 
 import com.google.common.collect.ImmutableMap;
 import org.mybatis.spring.SqlSessionTemplate;
