@@ -1,8 +1,8 @@
-package test.threads.taskproduceconsumer;
+package test.threads.task_3_pc;
 
 import test.common.bean.CustomerDO;
 import test.threads.producersconsumers.MyQueue;
-import test.threads.service.CheckCustomerAO;
+import test.threads.task_0_service.CheckCustomerAO;
 
 /**
  * User: weilin.li
@@ -24,7 +24,7 @@ public class TaskConsumer extends Thread {
             try {
                 CustomerDO customerDO = myQueue.pop();
 
-                CheckCustomerAO checkTaskAO = (CheckCustomerAO) test.threads.task_more_thread.Main.applicationContext.getBean("checkCustomerAO");
+                CheckCustomerAO checkTaskAO = (CheckCustomerAO) test.threads.task_2_more.Main.applicationContext.getBean("checkCustomerAO");
 
                 checkTaskAO.handlerCustomer(customerDO);
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="item">
+
+    <sql id="itemFields">
+        id,
+        title,
+        item_url,
+        price
+    </sql>
+
+    <select id="getGtId" parameterType="map" resultType="test.common.bean.ItemDO">
+        select
+            <include refid="itemFields" />
+        from
+            t_item
+        where
+            id > #{id}
+            limit #{limit}
+    </select>
+
+
+</mapper>

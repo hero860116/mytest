@@ -13,7 +13,11 @@ public class Main {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/spring-context.xml");
 
-        GenarateDataDAO nameAO = (GenarateDataDAO)context.getBean("genarateDataDAO");
+/*        GenarateDataDAO nameAO = (GenarateDataDAO)context.getBean("genarateDataDAO");
+
+        nameAO.genarateData();*/
+
+        GenarateItemDAO nameAO = (GenarateItemDAO)context.getBean("genarateItemDAO");
 
         nameAO.genarateData();
 

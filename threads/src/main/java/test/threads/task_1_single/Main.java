@@ -1,4 +1,4 @@
-package test.threads.task_single_thread;
+package test.threads.task_1_single;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

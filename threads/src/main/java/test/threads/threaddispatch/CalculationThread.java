@@ -41,12 +41,6 @@ public class CalculationThread extends Thread {
             thread.setStartTime(s);
             thread.start();
         }
-
-
-/*        long s = System.currentTimeMillis();
-        for (int i = 0; i < 20; i++) {
-            new CalculationThread(1,10000000, s).start();
-        }*/
     }
 
     public void setStartTime(long startTime) {

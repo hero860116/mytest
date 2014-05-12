@@ -1,6 +1,6 @@
-package test.threads.task_more_thread;
+package test.threads.task_2_more;
 
-import test.threads.service.CheckCustomerAO;
+import test.threads.task_0_service.CheckCustomerAO;
 
 /**
  * Created by lwl on 14-5-10.

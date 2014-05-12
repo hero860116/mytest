@@ -1,4 +1,4 @@
-package test.threads.task_more_thread;
+package test.threads.task_5_pc_moretask;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -12,8 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        for (int i = 0; i < 100; i++) {
-            new CheckTaskThread().start();
-        }
+        new Producer1().start();
+        new Producer2().start();
     }
 }

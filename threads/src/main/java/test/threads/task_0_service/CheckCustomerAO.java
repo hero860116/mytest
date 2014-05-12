@@ -1,4 +1,4 @@
-package test.threads.service;
+package test.threads.task_0_service;
 
 import com.google.common.collect.ImmutableMap;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 import test.common.bean.CustomerDO;
 import test.common.entity.BaseUrlManager;
 import test.threads.producersconsumers.MyQueue;
+import test.threads.task_6_pc_command.CustomerTask;
+import test.threads.task_6_pc_command.ITask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -178,7 +180,7 @@ public class CheckCustomerAO {
                 maxId = customerDOList.get(currentSize - 1).getId();
             }
 
-            System.out.println("hander a batch size:" + currentSize);
+            System.out.println("hander customer a batch size:" + currentSize);
 
         } while (currentSize == 500);
     }
@@ -198,5 +200,41 @@ public class CheckCustomerAO {
         s += System.currentTimeMillis();
 
         // System.out.println("costTime:" + s);
+    }
+
+    public void distributionCustomerTask(ArrayBlockingQueue<ITask> myQueue) {
+        long maxId = 0;
+        int batch = 500;
+        int currentSize = 0;
+
+        do {
+            List<CustomerDO> customerDOList = sqlSessionTemplate.selectList("customer.getGtId", ImmutableMap.of("id", maxId, "limit", batch));
+            currentSize = customerDOList.size();
+
+            if (currentSize > 0) {
+
+                List<CustomerDO> customerDOs = new ArrayList<CustomerDO>();
+                for (CustomerDO customerDO : customerDOList) {
+
+                    customerDOs.add(customerDO);
+                    try {
+
+                        if (customerDOs.size() == 100) {
+                            myQueue.put(new CustomerTask(customerDOs));
+
+                            customerDOs = new ArrayList<CustomerDO>();
+                        }
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                maxId = customerDOList.get(currentSize - 1).getId();
+            }
+
+            System.out.println("hander customer a batch size:" + currentSize);
+
+        } while (currentSize == 500);
     }
 }

@@ -1,7 +1,7 @@
-package test.threads.task2_more_thread;
+package test.threads.task_5_pc_moretask;
 
 import test.common.bean.CustomerDO;
-import test.threads.service.CheckCustomerAO;
+import test.threads.task_0_service.CheckCustomerAO;
 
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -24,9 +24,14 @@ public class Task1Consumer extends Thread {
 
         while (true) {
 
-                List<CustomerDO> customerDOs = myQueue.poll();
+            List<CustomerDO> customerDOs = null;
+            try {
+                customerDOs = myQueue.take();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
-                CheckCustomerAO checkTaskAO = (CheckCustomerAO) test.threads.task_more_thread.Main.applicationContext.getBean("checkCustomerAO");
+            CheckCustomerAO checkTaskAO = (CheckCustomerAO) test.threads.task_2_more.Main.applicationContext.getBean("checkCustomerAO");
 
                 checkTaskAO.handlerBatchCustomer3(customerDOs);
         }
