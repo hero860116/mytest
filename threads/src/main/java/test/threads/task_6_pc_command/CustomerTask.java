@@ -21,6 +21,6 @@ public class CustomerTask implements ITask {
     @Override
     public void execute() {
         CheckCustomerAO checkTaskAO = (CheckCustomerAO) test.threads.task_2_more.Main.applicationContext.getBean("checkCustomerAO");
-        checkTaskAO.handlerBatchCustomer3(customerDOs);
+        checkTaskAO.handlerCustomer(customerDOs);
     }
 }

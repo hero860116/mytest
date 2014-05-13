@@ -20,7 +20,7 @@ public class CustomerTask implements Runnable {
 
     @Override
     public void run() {
-        CheckCustomerAO checkTaskAO = (CheckCustomerAO) test.threads.task_2_more.Main.applicationContext.getBean("checkCustomerAO");
-        checkTaskAO.handlerBatchCustomer3(customerDOs);
+            CheckCustomerAO checkTaskAO = (CheckCustomerAO) test.threads.task_2_more.Main.applicationContext.getBean("checkCustomerAO");
+            checkTaskAO.handlerCustomer(customerDOs);
     }
 }

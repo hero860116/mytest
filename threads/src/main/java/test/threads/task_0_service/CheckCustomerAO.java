@@ -9,6 +9,7 @@ import test.common.entity.BaseUrlManager;
 import test.threads.producersconsumers.MyQueue;
 import test.threads.task_6_pc_command.CustomerTask;
 import test.threads.task_6_pc_command.ITask;
+import test.threads.task_7_jdk_execute.Main;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,50 +54,7 @@ public class CheckCustomerAO {
 
     }
 
-    public void getCustomers(MyQueue<CustomerDO> myQueue) {
-        long maxId = 0;
-        int batch = 500;
-        int currentSize = 0;
-
-        do {
-            List<CustomerDO> customerDOList = sqlSessionTemplate.selectList("customer.getGtId", ImmutableMap.of("id", maxId, "limit", batch));
-            currentSize = customerDOList.size();
-
-            if (currentSize > 0) {
-
-                for (CustomerDO customerDO : customerDOList) {
-
-                    try {
-                        myQueue.push(customerDO);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                maxId = customerDOList.get(currentSize - 1).getId();
-            }
-
-            System.out.println("hander a batch size:" + currentSize);
-
-        } while (currentSize == 500);
-    }
-
-    public void handlerCustomer(CustomerDO customerDO) {
-
-        long s = -System.currentTimeMillis();
-        BaseUrlManager.getJson("http://10.200.190.13:8080/send");
-
-        try {
-            Thread.sleep(20);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        s += System.currentTimeMillis();
-
-       // System.out.println("costTime:" + s);
-    }
-
-    public void getBatchCustomers(MyQueue<List<CustomerDO>> myQueue) {
+    public void distributionCustomerForpc(MyQueue<List<CustomerDO>> myQueue) {
         long maxId = 0;
         int batch = 500;
         int currentSize = 0;
@@ -132,24 +90,7 @@ public class CheckCustomerAO {
         } while (currentSize == 500);
     }
 
-    public void handlerBatchCustomer(List<CustomerDO> customerDOs) {
-
-        long s = -System.currentTimeMillis();
-        for (int i = 0; i < 5; i++) {
-            BaseUrlManager.getJson("http://10.200.190.13:8080/send");
-        }
-
-        try {
-            Thread.sleep(20);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        s += System.currentTimeMillis();
-
-        // System.out.println("costTime:" + s);
-    }
-
-    public void getBatchCustomers3(ArrayBlockingQueue<List<CustomerDO>> myQueue) {
+    public void distributionCustomerForJdk(ArrayBlockingQueue<List<CustomerDO>> myQueue) {
         long maxId = 0;
         int batch = 500;
         int currentSize = 0;
@@ -183,23 +124,6 @@ public class CheckCustomerAO {
             System.out.println("hander customer a batch size:" + currentSize);
 
         } while (currentSize == 500);
-    }
-
-    public void handlerBatchCustomer3(List<CustomerDO> customerDOs) {
-
-        long s = -System.currentTimeMillis();
-        for (int i = 0; i < 5; i++) {
-            BaseUrlManager.getJson("http://10.200.190.13:8080/send");
-        }
-
-        try {
-            Thread.sleep(20);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        s += System.currentTimeMillis();
-
-        // System.out.println("costTime:" + s);
     }
 
     public void distributionCustomerTask(ArrayBlockingQueue<ITask> myQueue) {
@@ -236,5 +160,54 @@ public class CheckCustomerAO {
             System.out.println("hander customer a batch size:" + currentSize);
 
         } while (currentSize == 500);
+    }
+
+    public void distributionCustomerTaskForJdk() {
+        long maxId = 0;
+        int batch = 500;
+        int currentSize = 0;
+
+        do {
+            List<CustomerDO> customerDOList = sqlSessionTemplate.selectList("customer.getGtId", ImmutableMap.of("id", maxId, "limit", batch));
+            currentSize = customerDOList.size();
+
+            if (currentSize > 0) {
+
+                List<CustomerDO> customerDOs = new ArrayList<CustomerDO>();
+                for (CustomerDO customerDO : customerDOList) {
+
+                    customerDOs.add(customerDO);
+
+                    if (customerDOs.size() == 100) {
+
+                        Main.threadPoolExecutor.submit(new test.threads.task_7_jdk_execute.CustomerTask(customerDOs));
+
+                        customerDOs = new ArrayList<CustomerDO>();
+                    }
+                }
+
+                maxId = customerDOList.get(currentSize - 1).getId();
+            }
+
+            System.out.println("hander customer a batch size:" + currentSize);
+
+        } while (currentSize == 500);
+    }
+
+    public void handlerCustomer(List<CustomerDO> customerDOs) {
+
+        long s = -System.currentTimeMillis();
+        for (int i = 0; i < 5; i++) {
+            BaseUrlManager.getJson("http://10.200.190.13:8080/send");
+        }
+
+        try {
+            Thread.sleep(20);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        s += System.currentTimeMillis();
+
+        // System.out.println("costTime:" + s);
     }
 }

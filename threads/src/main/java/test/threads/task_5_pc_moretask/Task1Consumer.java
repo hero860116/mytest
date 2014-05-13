@@ -33,7 +33,7 @@ public class Task1Consumer extends Thread {
 
             CheckCustomerAO checkTaskAO = (CheckCustomerAO) test.threads.task_2_more.Main.applicationContext.getBean("checkCustomerAO");
 
-                checkTaskAO.handlerBatchCustomer3(customerDOs);
+                checkTaskAO.handlerCustomer(customerDOs);
         }
 
     }

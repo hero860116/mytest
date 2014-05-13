@@ -1,9 +1,9 @@
-package test.threads.task_5_pc_moretask;
+package test.threads.task_7_jdk_execute;
 
-import test.common.bean.CustomerDO;
 import test.threads.task_0_service.CheckCustomerAO;
+import test.threads.task_6_pc_command.ITask;
+import test.threads.task_6_pc_command.TaskConsumer;
 
-import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
@@ -17,13 +17,6 @@ public class Producer1 extends Thread{
     public void run() {
         CheckCustomerAO checkTaskAO = (CheckCustomerAO) test.threads.task_2_more.Main.applicationContext.getBean("checkCustomerAO");
 
-
-        ArrayBlockingQueue<List<CustomerDO>> myQueue = new ArrayBlockingQueue<List<CustomerDO>>(10);
-
-        for (int i = 0; i < 10; i++) {
-            new Task1Consumer(myQueue).start();
-        }
-
-        checkTaskAO.distributionCustomerForJdk(myQueue);
+        checkTaskAO.distributionCustomerTaskForJdk();
     }
 }

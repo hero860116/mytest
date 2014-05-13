@@ -22,6 +22,7 @@
         <module>google_guava</module>
         <module>performance_generate_database</module>
         <module>performance_generate_receive_web</module>
+        <module>data-impala</module>
     </modules>
 
     <dependencies>
